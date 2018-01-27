@@ -1,5 +1,5 @@
 {
-  "name": "node-flon",
+  "name": "flon",
   "version": "1.0.0",
   "description": "FLat Object Notation compatible with gron",
   "main": "index.js",
@@ -7,9 +7,10 @@
     "flon": "node ./bin/flon.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tap ./test/*.js"
   },
   "keywords": [
+    "flon",
     "json",
     "flat",
     "object",
@@ -22,6 +23,7 @@
     "axios": "^0.17.1",
     "oboe": "^2.1.4",
     "ramda": "^0.25.0",
+    "stream-buffers": "^3.0.1",
     "yargs": "^11.0.0"
   },
   "devDependencies": {
