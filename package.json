@@ -1,0 +1,24 @@
+{
+  "name": "node-flon",
+  "version": "1.0.0",
+  "description": "FLat Object Notation compatible with gron",
+  "main": "index.js",
+  "bin": {
+    "flon": "node ./bin/flon.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "json",
+    "flat",
+    "object",
+    "notation",
+    "gron"
+  ],
+  "author": "Joel Edwards <joeledwards@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "yargs": "^11.0.0"
+  }
+}
