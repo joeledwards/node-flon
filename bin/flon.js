@@ -21,17 +21,21 @@ function config () {
 }
 
 async function run () {
-  const r = require('ramda')
-  const unmarshal = require('../lib/unmarshal')
-
   let source = 'stdin'
+
   try {
+    const {stopwatch} = require('durations')
+    const r = require('ramda')
+    const unmarshal = require('../lib/unmarshal')
+
     const {file, url} = config()
     const output = process.stdout
+    const watch = stopwatch()
 
     if (file) {
       source = file
       const fs = require('fs')
+      watch.start()
       await unmarshal(fs.createReadStream(file), output)
     } else if (url) {
       source = url
@@ -41,17 +45,27 @@ async function run () {
         url: url,
         responseType: 'stream'
       })
+      watch.start()
       await unmarshal(data, output)
     } else {
       process.stdin.resume()
+      watch.start()
       await unmarshal(process.stdin, output)
     }
   } catch (error) {
     console.error(
-      `Error reading content from ${source ? source : 'stdin'} :`,
+      `Error parsing JSON from ${source ? source : 'stdin'} :`,
       error
     )
   }
 }
 
-run()
+async function flon () {
+  try {
+    await run()
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+flon()
