@@ -25,10 +25,10 @@
     "durations": "^3.4.1",
     "oboe": "^2.1.4",
     "ramda": "^0.25.0",
-    "stream-buffers": "^3.0.1",
     "yargs": "^11.0.0"
   },
   "devDependencies": {
+    "stream-buffers": "^3.0.1",
     "tap": "^11.0.1"
   }
 }

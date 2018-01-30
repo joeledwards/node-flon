@@ -39,9 +39,9 @@ json.dependencies.axios = "^0.17.1";
 json.dependencies.durations = "^3.4.1";
 json.dependencies.oboe = "^2.1.4";
 json.dependencies.ramda = "^0.25.0";
-json.dependencies["stream-buffers"] = "^3.0.1";
 json.dependencies.yargs = "^11.0.0";
 json.devDependencies = {};
+json.devDependencies["stream-buffers"] = "^3.0.1";
 json.devDependencies.tap = "^11.0.1";
 ```
 
