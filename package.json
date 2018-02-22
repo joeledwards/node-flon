@@ -4,7 +4,7 @@
   "description": "FLat Object Notation compatible with gron",
   "main": "index.js",
   "bin": {
-    "flon": "node ./bin/flon.js"
+    "flon": "bin/flon.js"
   },
   "scripts": {
     "test": "tap ./test/*.js"
