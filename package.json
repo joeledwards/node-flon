@@ -22,6 +22,7 @@
   "dependencies": {
     "@buzuli/color": "^1.1.2",
     "axios": "^0.17.1",
+    "buffered-stream": "0.0.1",
     "durations": "^3.4.1",
     "oboe": "^2.1.4",
     "ramda": "^0.25.0",
