@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs')
+const buffered = require('buffered-stream')
+const {orange} = require('@buzuli/color')
 
 function config () {
   return yargs
@@ -16,6 +18,24 @@ function config () {
       alias: ['u'],
       conflicts: ['file']
     })
+    .option('summary', {
+      type: 'boolean',
+      desc: 'output summary info to stderr',
+      default: false,
+      alias: ['v']
+    })
+    .option('no-buffer', {
+      type: 'boolean',
+      desc: 'flush every line as it is generated',
+      default: false,
+      alias: ['B']
+    })
+    .option('no-color', {
+      type: 'boolean',
+      desc: 'do not colorize output',
+      default: false,
+      alias: ['C']
+    })
     .help()
     .argv
 }
@@ -28,15 +48,27 @@ async function run () {
     const r = require('ramda')
     const unmarshal = require('../lib/unmarshal')
 
-    const {file, url} = config()
-    const output = process.stdout
     const watch = stopwatch()
+    const {
+      file,
+      noBuffer,
+      noColor,
+      summarize,
+      url
+    } = config()
+
+    let output = process.stdout
+    if (!noBuffer) {
+      const buffer = buffered(8192)
+      buffer.pipe(output)
+      output = buffer
+    }
 
     if (file) {
       source = file
       const fs = require('fs')
       watch.start()
-      await unmarshal(fs.createReadStream(file), output)
+      await unmarshal(fs.createReadStream(file), output, {noColor})
     } else if (url) {
       source = url
       const axios = require('axios')
@@ -51,6 +83,14 @@ async function run () {
       process.stdin.resume()
       watch.start()
       await unmarshal(process.stdin, output)
+    }
+
+    if (!noBuffer) {
+      output.end()
+    }
+
+    if (summarize) {
+      console.error(`Finished parsing in ${orange(watch)}`)
     }
   } catch (error) {
     console.error(

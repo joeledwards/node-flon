@@ -14,11 +14,11 @@ const s = async text => {
   return output.getContentsAsString()
 }
 
-const u = async obj => {
-  return s(JSON.stringify(obj))
+const u = async (...objs) => {
+  return s(objs.map(JSON.stringify).join("\n"))
 }
 
-tap.test(async t => {
+tap.test('should parse JSON objects', async t => {
     t.equal(await u({}),
             'json = {};\n'
            )
@@ -58,10 +58,6 @@ tap.test(async t => {
             'json = {};\n' +
             'json.t = "foobar";\n'
            )
-    t.equal(await u(['a']),
-            'json = [];\n' +
-            'json[0] = "a";\n'
-           )
     t.equal(await u({a: [1]}),
             'json = {};\n' +
             'json.a = [];\n' +
@@ -85,4 +81,33 @@ tap.test(async t => {
     )
 
     t.done()
+})
+
+tap.test('should parse JSON arrays', async t => {
+    t.equal(await u(['a']),
+            'json = [];\n' +
+            'json[0] = "a";\n'
+           )
+    t.equal(await u([1, '2']),
+            'json = [];\n' +
+            'json[0] = 1;\n' +
+            'json[1] = "2";\n'
+           )
+})
+
+tap.test('should parse multiple, full JSON structures', async t => {
+    t.equal(await s("{}\n{}\n"),
+            'json = {};\n'
+    )
+    t.equal(await s('{}\n{"id": "a"}\n'),
+            'json = {};\n' +
+            'json.id = "a";\n'
+    )
+    t.equal(await s('{"id": "a", "value": 1}\n{"id": "b", "value": 2}'),
+            'json = {};\n' +
+            'json.id = "a";\n' +
+            'json.value = 1;\n' +
+            'json.id = "b";\n' +
+            'json.value = 2;\n'
+    )
 })
