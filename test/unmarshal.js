@@ -5,13 +5,17 @@ const {
   ReadableStreamBuffer
 } = require('stream-buffers')
 
-const u = async obj => {
+const s = async text => {
   const input = new ReadableStreamBuffer()
   const output = new WritableStreamBuffer()
-  input.put(Buffer.from(JSON.stringify(obj)))
+  input.put(Buffer.from(text))
   input.stop()
   await unmarshal(input, output)
   return output.getContentsAsString()
+}
+
+const u = async obj => {
+  return s(JSON.stringify(obj))
 }
 
 tap.test(async t => {
@@ -71,6 +75,14 @@ tap.test(async t => {
             'json = {};\n' +
             'json["\\"q\\""] = 1;\n'
            )
+
+    t.equal(await s('{"id": "a", "value": 1}\n{"id": "b", "value": 2}'),
+            'json = {};\n' +
+            'json.id = "a";\n' +
+            'json.value = 1;\n' +
+            'json.id = "b";\n' +
+            'json.value = 2;\n'
+    )
 
     t.done()
 })
