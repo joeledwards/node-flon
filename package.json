@@ -1,6 +1,6 @@
 {
   "name": "flon",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "FLat Object Notation compatible with gron (grep-able JSON)",
   "repository": "github:joeledwards/node-flon",
   "main": "index.js",
