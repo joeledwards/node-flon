@@ -1,7 +1,8 @@
 {
   "name": "flon",
   "version": "1.2.0",
-  "description": "FLat Object Notation compatible with gron",
+  "description": "FLat Object Notation compatible with gron (grep-able JSON)",
+  "repository": "github:joeledwards/node-flon",
   "main": "index.js",
   "bin": {
     "flon": "bin/flon.js"
@@ -20,8 +21,8 @@
   "author": "Joel Edwards <joeledwards@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@buzuli/color": "^1.1.2",
-    "axios": "^0.17.1",
+    "@buzuli/color": "^1.2.0",
+    "axios": "^0.18.0",
     "buffered-stream": "0.0.1",
     "durations": "^3.4.1",
     "oboe": "^2.1.4",
@@ -30,6 +31,6 @@
   },
   "devDependencies": {
     "stream-buffers": "^3.0.1",
-    "tap": "^11.0.1"
+    "tap": "^11.1.4"
   }
 }
