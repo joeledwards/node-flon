@@ -11,17 +11,23 @@ Flattens JSON using the same format as [gron](https://github.com/tomnomnom/gron)
 $ npm i -g flon
 ```
 
+Or run via `npx`:
+
+```shell
+$ npx flon -u https://registry.npmjs.com/flon
+```
+
 ## Example
 
 ```shell
 $ cat package.json | flon
 json = {};
 json.name = "flon";
-json.version = "1.0.0";
+json.version = "1.2.0";
 json.description = "FLat Object Notation compatible with gron";
 json.main = "index.js";
 json.bin = {};
-json.bin.flon = "node ./bin/flon.js";
+json.bin.flon = "bin/flon.js";
 json.scripts = {};
 json.scripts.test = "tap ./test/*.js";
 json.keywords = [];
@@ -34,15 +40,16 @@ json.keywords[5] = "gron";
 json.author = "Joel Edwards <joeledwards@gmail.com>";
 json.license = "ISC";
 json.dependencies = {};
-json.dependencies["@buzuli/color"] = "^1.1.2";
-json.dependencies.axios = "^0.17.1";
+json.dependencies["@buzuli/color"] = "^1.3.1";
+json.dependencies.axios = "^0.18.0";
+json.dependencies["buffered-stream"] = "0.0.1";
+json.dependencies.clarinet = "^0.12.1";
 json.dependencies.durations = "^3.4.1";
-json.dependencies.oboe = "^2.1.4";
 json.dependencies.ramda = "^0.25.0";
-json.dependencies.yargs = "^11.0.0";
+json.dependencies.yargs = "^12.0.2";
 json.devDependencies = {};
-json.devDependencies["stream-buffers"] = "^3.0.1";
-json.devDependencies.tap = "^11.0.1";
+json.devDependencies["stream-buffers"] = "^3.0.2";
+json.devDependencies.tap = "^12.0.1";
 ```
 
 ## Options
@@ -50,10 +57,13 @@ json.devDependencies.tap = "^11.0.1";
 ```shell
 $ flon --help
 Options:
-  --version   Show version number                                      [boolean]
-  --file, -f  read from specified file instead of stdin                 [string]
-  --url, -u   read from specified URL instead of stdin                  [string]
-  --help      Show help                                                [boolean]
+  --version        Show version number                                 [boolean]
+  --file, -f       read from specified file instead of stdin            [string]
+  --url, -u        read from specified URL instead of stdin             [string]
+  --summary, -v    output summary info to stderr      [boolean] [default: false]
+  --no-buffer, -B  flush every line as it is generated[boolean] [default: false]
+  --no-color, -C   do not colorize output             [boolean] [default: false]
+  --help           Show help                                           [boolean]
 ```
 
 [travis-url]: https://travis-ci.org/joeledwards/node-flon

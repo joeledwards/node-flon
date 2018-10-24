@@ -10,12 +10,14 @@ const s = async text => {
   const output = new WritableStreamBuffer()
   input.put(Buffer.from(text))
   input.stop()
-  await unmarshal(input, output)
-  return output.getContentsAsString()
+  await unmarshal(input, output, {debug: false})
+  const data = output.getContentsAsString()
+  return data
 }
 
 const u = async (...objs) => {
-  return s(objs.map(JSON.stringify).join("\n"))
+  const data = objs.map(JSON.stringify).join("\n")
+  return await s(data)
 }
 
 tap.test('should parse JSON objects', async t => {
