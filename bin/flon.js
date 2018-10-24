@@ -36,6 +36,12 @@ function config () {
       default: false,
       alias: ['C']
     })
+    .option('allow-unknown-certs', {
+      type: 'boolean',
+      desc: 'do not validate TLS certs',
+      default: false,
+      alias: ['U']
+    })
     .help()
     .argv
 }
@@ -50,12 +56,21 @@ async function run () {
 
     const watch = stopwatch()
     const {
+      allowUnknownCerts,
       file,
       noBuffer,
       noColor,
       summarize,
       url
     } = config()
+
+    let httpsAgent
+
+    if (allowUnknownCerts) {
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+      const {Agent} = require('https')
+      httpsAgent = new Agent({rejectUnauthorized: false})
+    }
 
     let output = process.stdout
     if (!noBuffer) {
@@ -75,6 +90,7 @@ async function run () {
       const {data} = await axios({
         method: 'get',
         url: url,
+        httpsAgent,
         responseType: 'stream'
       })
       watch.start()
