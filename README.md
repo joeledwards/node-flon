@@ -23,8 +23,9 @@ $ npx flon -u https://registry.npmjs.com/flon
 $ cat package.json | flon
 json = {};
 json.name = "flon";
-json.version = "1.2.0";
-json.description = "FLat Object Notation compatible with gron";
+json.version = "1.4.0";
+json.description = "FLat Object Notation compatible with gron (grep-able JSON)";
+json.repository = "github:joeledwards/node-flon";
 json.main = "index.js";
 json.bin = {};
 json.bin.flon = "bin/flon.js";
@@ -63,6 +64,7 @@ Options:
   --summary, -v    output summary info to stderr      [boolean] [default: false]
   --no-buffer, -B  flush every line as it is generated[boolean] [default: false]
   --no-color, -C   do not colorize output             [boolean] [default: false]
+  --allow-unknown-certs, -U  do not validate TLS certs[boolean] [default: false]
   --help           Show help                                           [boolean]
 ```
 
