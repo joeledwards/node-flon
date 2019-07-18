@@ -2,7 +2,7 @@
 
 const yargs = require('yargs')
 const buffered = require('buffered-stream')
-const {orange} = require('@buzuli/color')
+const { orange } = require('@buzuli/color')
 
 function config () {
   return yargs
@@ -50,8 +50,7 @@ async function run () {
   let source = 'stdin'
 
   try {
-    const {stopwatch} = require('durations')
-    const r = require('ramda')
+    const { stopwatch } = require('durations')
     const unmarshal = require('../lib/unmarshal')
 
     const watch = stopwatch()
@@ -68,8 +67,8 @@ async function run () {
 
     if (allowUnknownCerts) {
       process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-      const {Agent} = require('https')
-      httpsAgent = new Agent({rejectUnauthorized: false})
+      const { Agent } = require('https')
+      httpsAgent = new Agent({ rejectUnauthorized: false })
     }
 
     let output = process.stdout
@@ -83,11 +82,11 @@ async function run () {
       source = file
       const fs = require('fs')
       watch.start()
-      await unmarshal(fs.createReadStream(file), output, {noColor})
+      await unmarshal(fs.createReadStream(file), output, { noColor })
     } else if (url) {
       source = url
       const axios = require('axios')
-      const {data} = await axios({
+      const { data } = await axios({
         method: 'get',
         url: url,
         httpsAgent,
@@ -110,7 +109,7 @@ async function run () {
     }
   } catch (error) {
     console.error(
-      `Error parsing JSON from ${source ? source : 'stdin'} :`,
+      `Error parsing JSON from ${source || 'stdin'} :`,
       error
     )
   }
