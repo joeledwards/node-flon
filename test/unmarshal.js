@@ -1,3 +1,5 @@
+process.env.BUZULI_COLOR_LEVEL = 0
+
 const tap = require('tap')
 const unmarshal = require('../lib/unmarshal')
 const {
