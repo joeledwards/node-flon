@@ -75,6 +75,12 @@ async function run () {
     if (!noBuffer) {
       const buffer = buffered(8192)
       buffer.pipe(output)
+      output.on('error', error => {
+        if (error.code !== 'EPIPE') {
+          console.error(error)
+        }
+        process.exit(1)
+      })
       output = buffer
     }
 
@@ -82,7 +88,8 @@ async function run () {
       source = file
       const fs = require('fs')
       watch.start()
-      await unmarshal(fs.createReadStream(file), output, { noColor })
+      const input = fs.createReadStream(file)
+      await unmarshal(input, output, { noColor })
     } else if (url) {
       source = url
       const axios = require('axios')
@@ -108,10 +115,12 @@ async function run () {
       console.error(`Finished parsing in ${orange(watch)}`)
     }
   } catch (error) {
-    console.error(
-      `Error parsing JSON from ${source || 'stdin'} :`,
-      error
-    )
+    if (error.code !== 'EPIPE') {
+      console.error(
+        `Error parsing JSON from ${source || 'stdin'} :`,
+        error
+      )
+    }
   }
 }
 
