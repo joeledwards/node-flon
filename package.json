@@ -31,16 +31,16 @@
   "license": "ISC",
   "dependencies": {
     "@buzuli/color": "^2.2.2",
-    "axios": "^0.19.0",
+    "axios": "^0.19.2",
     "buffered-stream": "0.0.1",
     "clarinet": "^0.12.4",
-    "durations": "^3.4.1",
-    "ramda": "^0.26.1",
-    "yargs": "^15.0.2"
+    "durations": "^3.4.2",
+    "ramda": "^0.27.1",
+    "yargs": "^15.4.1"
   },
   "devDependencies": {
-    "standard": "^14.3.1",
+    "standard": "^14.3.4",
     "stream-buffers": "^3.0.2",
-    "tap": "^14.9.2"
+    "tap": "^14.10.8"
   }
 }

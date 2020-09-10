@@ -14,7 +14,7 @@ const s = async text => {
   const debug = false
   input.put(Buffer.from(text))
   input.stop()
-  await unmarshal(input, output, { debug })
+  await unmarshal(input, output, { debug, noColor: true })
   const data = output.getContentsAsString()
   return data
 }
