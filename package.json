@@ -31,7 +31,7 @@
   "license": "ISC",
   "dependencies": {
     "@buzuli/color": "^2.2.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "buffered-stream": "0.0.1",
     "clarinet": "^0.12.4",
     "durations": "^3.4.2",
