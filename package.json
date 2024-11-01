@@ -30,7 +30,7 @@
   "author": "Joel Edwards <joeledwards@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@buzuli/color": "^2.3.2",
+    "@buzuli/color": "^2.4.0",
     "axios": "^0.19.2",
     "buffered-stream": "0.0.1",
     "clarinet": "^0.12.4",
